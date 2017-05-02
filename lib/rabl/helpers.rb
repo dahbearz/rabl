@@ -8,7 +8,9 @@ module Rabl
     def data_object(data)
       data = data.keys.first if data.is_a?(Hash) && data.keys.size == 1
       data = @_object.__send__(data) if data.is_a?(Symbol) && defined?(@_object) && @_object && @_object.respond_to?(data)
-      data
+
+      # Return nil if no data was retrieved
+      data unless data.is_a?(Symbol)
     end
 
     # data_object_attribute(data) => @_object.send(data)

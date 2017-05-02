@@ -168,6 +168,8 @@ module Rabl
         name   = is_name_value?(options[:root]) ? options[:root] : data_name(data)
         object = data_object(data)
 
+        return unless object.present?
+
         engine_options = @options.slice(:child_root)
         engine_options[:root] = is_collection?(object) && options.fetch(:object_root, @options[:child_root]) # child @users
         engine_options[:object_root_name] = options[:object_root] if is_name_value?(options[:object_root])
